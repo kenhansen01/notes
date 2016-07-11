@@ -1,0 +1,25 @@
+﻿# Node Modules
+node_modules/
+npm-debug.log
+
+# Bower Components
+bower_components/
+
+# IDEs
+.vs/
+.vscode
+.idea/
+jsconfig.json
+.nvts_analysis.dat
+**/*.njsproj
+**/*.sln
+
+# Typings file.
+typings/
+
+# Misc
+tmp/
+
+# Mac OSX Finder files
+**/.DS_Store
+.DS_Store
