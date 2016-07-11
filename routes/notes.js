@@ -48,4 +48,46 @@ router.post('/save', (req,res,next) => {
   });
 })
 
+// Edit exitsing note
+router.get('/edit', (req, res, next) => {
+  notes.read(req.query.key)
+    .then(note => {
+      res.render('noteedit', {
+        title: note ? (`Edit ${note.title}`) : 'Add a note',
+        docreate: false,
+        notekey: req.query.key,
+        note: note
+      });
+    })
+    .catch(err => {
+      next(err);
+    });
+})
+
+// Delete a note.
+router.get('/destroy', (req, res, render) => {
+  notes.read(req.query.key)
+    .then(note => {
+      res.render('notedestroy', {
+        title: note ? note.title : '',
+        notekey: req.query.key,
+        note: note
+      });
+    })
+    .catch(err => {
+      next(err);
+    });
+})
+
+// Confirm Destroy Note
+router.post('/destroy/confirm', (req, res, next) => {
+  notes.destroy(req.body.notekey)
+    .then(() => {
+      res.redirect('/');
+    })
+    .catch(err => {
+      next(err);
+    });
+})
+
 module.exports = router;
