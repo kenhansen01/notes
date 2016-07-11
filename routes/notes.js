@@ -12,7 +12,12 @@ router.get('/add', (req, res, next) => {
     title: 'Add a Note',
     docreate: true,
     notekey: '',
-    note: undefined
+    note: undefined,
+    breadcrumbs: [
+      { href: '/', text: 'Home' },
+      { active: true, text: 'Add Note' }
+    ],
+    hideAddNote: true 
   });
 });
 
@@ -24,6 +29,10 @@ router.get('/view', (req, res, next) => {
       title: note ? note.title : '',
       notekey: req.query.key,
       note: note,
+      breadcrumbs: [
+        { href: '/', text: 'Home' },
+        { active: true, text: note.title }
+      ]
     })
   })
   .catch(err => {
@@ -56,7 +65,12 @@ router.get('/edit', (req, res, next) => {
         title: note ? (`Edit ${note.title}`) : 'Add a note',
         docreate: false,
         notekey: req.query.key,
-        note: note
+        note: note,
+        breadcrumbs: [
+          { href: '/', text: 'Home' },
+          { active: true, text: note.title }
+        ],
+        hideAddNote: true 
       });
     })
     .catch(err => {
@@ -71,7 +85,11 @@ router.get('/destroy', (req, res, render) => {
       res.render('notedestroy', {
         title: note ? note.title : '',
         notekey: req.query.key,
-        note: note
+        note: note,
+        breadcrumbs: [
+          { href: '/', text: 'Home' },
+          { active: true, text: 'Delete Note' }
+        ]
       });
     })
     .catch(err => {

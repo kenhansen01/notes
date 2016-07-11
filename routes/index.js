@@ -23,7 +23,10 @@ router.get('/', function(req, res, next) {
   .then(notelist => {
     res.render('index', {
       title: 'Notes',
-      notelist: notelist    
+      notelist: notelist,
+      breadcrumbs: [
+        { href: '/', text: 'Home' }
+      ]   
     });
   })
   .catch(err => {
